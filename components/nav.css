@@ -1,0 +1,18 @@
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.nav-link {
+    color: #9ca3af; /* gray-400 */
+    transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+    color: #facc15; /* yellow-400 */
+}
+
+.nav-link.active:hover {
+    color: #facc15; /* white */
+}
