@@ -1,9 +1,11 @@
-'use client';
+"use client";
 
-import { useForm } from 'react-hook-form';
-import { Button } from '@/components/ui/button';
-import InputField from '@/components/Forms/InputField';
-import FooterLink from '@/components/Forms/FooterLink';
+import { useForm } from "react-hook-form";
+import { Button } from "@/components/ui/button";
+import InputField from "@/components/Forms/InputField";
+import FooterLink from "@/components/Forms/FooterLink";
+import { signInWithEmail } from "@/lib/actions/auth.action";
+import { toast } from "sonner";
 
 const SignIn = () => {
     const {
@@ -12,18 +14,22 @@ const SignIn = () => {
         formState: { errors, isSubmitting },
     } = useForm<SignInFormData>({
         defaultValues: {
-            email: '',
-            password: '',
+            email: "",
+            password: "",
         },
-        mode: 'onBlur',
+        mode: "onBlur",
     });
 
     const onSubmit = async (data: SignInFormData) => {
-        try {
-            console.log('Sign in', data);
-        } catch (e) {
-            console.error(e);
+        const result = await signInWithEmail({
+            email: data.email,
+            password: data.password,
+        });
+
+        if (result?.success === false) {
+            toast.error(result.error ?? "Sign in failed");
         }
+        // ✅ NO router.push here
     };
 
     return (
@@ -37,7 +43,7 @@ const SignIn = () => {
                     placeholder="contact@pg.com"
                     register={register}
                     error={errors.email}
-                    validation={{ required: 'Email is required', pattern: /^\w+@\w+\.\w+$/ }}
+                    validation={{ required: "Email is required" }}
                 />
 
                 <InputField
@@ -47,11 +53,11 @@ const SignIn = () => {
                     type="password"
                     register={register}
                     error={errors.password}
-                    validation={{ required: 'Password is required', minLength: 8 }}
+                    validation={{ required: "Password is required", minLength: 8 }}
                 />
 
                 <Button type="submit" disabled={isSubmitting} className="yellow-btn w-full mt-5">
-                    {isSubmitting ? 'Signing In' : 'Sign In'}
+                    {isSubmitting ? "Signing In" : "Sign In"}
                 </Button>
 
                 <FooterLink text="Don't have an account?" linkText="Create an account" href="/sign-up" />
@@ -59,4 +65,5 @@ const SignIn = () => {
         </>
     );
 };
+
 export default SignIn;
