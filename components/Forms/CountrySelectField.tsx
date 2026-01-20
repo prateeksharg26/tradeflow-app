@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import {Control, Controller, FieldError, FieldValues} from "react-hook-form";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {Control, Controller, FieldError, FieldValues, Path} from "react-hook-form";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import {
     Command,
     CommandEmpty,
@@ -33,14 +33,13 @@ const countryOptions: CountryOption[] = countries.map((c) => ({
 
 /* ---------------- Props ---------------- */
 
-type CountrySelectProps = {
-    name: string;
+type CountrySelectProps<T extends FieldValues> = {
+    name: Path<T>;
     label: string;
-    control: Control<FieldValues>;
+    control: Control<T>;
     error?: FieldError;
     required?: boolean;
 };
-
 /* ---------------- Dropdown ---------------- */
 
 const CountrySelect = ({
@@ -112,13 +111,13 @@ const CountrySelect = ({
 
 /* ---------------- Form Field ---------------- */
 
-export const CountrySelectField = ({
-                                       name,
-                                       label,
-                                       control,
-                                       error,
-                                       required = false,
-                                   }: CountrySelectProps) => {
+export function CountrySelectField<T extends FieldValues>({
+                                                              name,
+                                                              label,
+                                                              control,
+                                                              error,
+                                                              required = false,
+                                                          }: CountrySelectProps<T>) {
     return (
         <div className="space-y-2">
             <Label>{label}</Label>
