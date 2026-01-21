@@ -14,7 +14,7 @@ const Layout = async ({ children }: { children : React.ReactNode }) => {
             <section className="auth-left-section scrollbar-hide-default">
                 <Link href="/" className="flex items-center gap-3">
                     <Image
-                        src="/assets/images/myphoto.jpeg"
+                        src="/assets/icons/logo.svg"
                         alt="Tradeflow logo"
                         width={32}
                         height={32}

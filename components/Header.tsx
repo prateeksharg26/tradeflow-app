@@ -12,9 +12,17 @@ const Header = async ({ user }: { user: User }) => {
     return (
         <header className="sticky top-0 header">
             <div className="container header-wrapper">
-                <Link href="/">
-                    <Image src="/assets/icons/logo.svg" alt=" Tradeflow logo" width={140} height={32} className="h-8 w-auto cursor-pointer" />
-                    <span className="font-bold tracking-wide text-[28px] text-white">Tradeflow</span>
+                <Link href="/" className="flex items-center gap-2">
+                    <Image
+                        src="/assets/icons/logo.svg"
+                        alt="Tradeflow logo"
+                        width={36}
+                        height={36}
+                        className="cursor-pointer"
+                    />
+                    <span className="text-2xl font-bold tracking-wide text-white">
+    Tradeflow
+  </span>
                 </Link>
                 <nav className="hidden sm:block">
                     <NavItems initialStocks={initialStocks} />
